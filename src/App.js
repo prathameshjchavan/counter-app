@@ -29,12 +29,18 @@ class App extends Component {
 		};
 	}
 
-	handleIncrement = (counterId) => {
-		let counters = _.cloneDeep(this.state.counters);
-		counters = counters.map((counter) => {
-			counter.id === counterId && counter.value++;
-			return counter;
-		});
+	handleIncrement = (counter) => {
+		// let counters = _.cloneDeep(this.state.counters);
+		// counters = counters.map((counter) => {
+		// 	counter.id === counterId && counter.value++;
+		// 	return counter;
+		// });
+		// this.setState({ counters });
+
+		const counters = [...this.state.counters];
+		const index = counters.indexOf(counter);
+		counters[index] = { ...counter };
+		counters[index].value++;
 		this.setState({ counters });
 	};
 
