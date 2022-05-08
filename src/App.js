@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import NavBar from "./components/navBar";
 import Counters from "./components/counters";
+import _ from "lodash";
 
 class App extends Component {
 	constructor() {
@@ -29,7 +30,8 @@ class App extends Component {
 	}
 
 	handleIncrement = (counterId) => {
-		const counters = this.state.counters.map((counter) => {
+		let counters = _.cloneDeep(this.state.counters);
+		counters = counters.map((counter) => {
 			counter.id === counterId && counter.value++;
 			return counter;
 		});
