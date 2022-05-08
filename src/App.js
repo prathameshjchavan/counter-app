@@ -5,28 +5,34 @@ import Counters from "./components/counters";
 import _ from "lodash";
 
 class App extends Component {
+	state = {
+		counters: [
+			{
+				id: 1,
+				value: 1,
+			},
+			{
+				id: 2,
+				value: 4,
+			},
+			{
+				id: 3,
+				value: 2,
+			},
+			{
+				id: 4,
+				value: 0,
+			},
+		],
+	};
+
 	constructor() {
 		super();
-		this.state = {
-			counters: [
-				{
-					id: 1,
-					value: 1,
-				},
-				{
-					id: 2,
-					value: 4,
-				},
-				{
-					id: 3,
-					value: 2,
-				},
-				{
-					id: 4,
-					value: 0,
-				},
-			],
-		};
+		console.log("App - Constructor");
+	}
+
+	componentDidMount() {
+		console.log("App - Mounted");
 	}
 
 	handleIncrement = (counter) => {
@@ -41,6 +47,14 @@ class App extends Component {
 		const index = counters.indexOf(counter);
 		counters[index] = { ...counter };
 		counters[index].value++;
+		this.setState({ counters });
+	};
+
+	handleDecrement = (counter) => {
+		const counters = [...this.state.counters];
+		const index = counters.indexOf(counter);
+		counters[index] = { ...counter };
+		counters[index].value--;
 		this.setState({ counters });
 	};
 
@@ -60,6 +74,8 @@ class App extends Component {
 	};
 
 	render() {
+		console.log("App - Rendered");
+
 		return (
 			<React.Fragment>
 				<NavBar
@@ -70,6 +86,7 @@ class App extends Component {
 						counters={this.state.counters}
 						onReset={this.handleReset}
 						onIncrement={this.handleIncrement}
+						onDecrement={this.handleDecrement}
 						onDelete={this.handleDelete}
 					/>
 				</main>
